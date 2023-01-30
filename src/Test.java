@@ -6,35 +6,47 @@ public class Test {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner scanner = new Scanner(System.in);
-		Banque b1 = new Banque("BANQUE CDA");
-		Agence a1 = new Agence("lmp", "lmp", "fhg");
+		Banque b = new Banque("BANQUE CDA");
+		Agence a = new Agence("lmp", "lmp", "fhg");
+		Client c = new Client(null, null, null, null, null);
 		ArrayList<Agence> listeAgence = new ArrayList<Agence>();
 
-		menuLoop(scanner, b1, a1, listeAgence);
+		menuLoop(scanner, b, a, c, listeAgence);
 	}
 
-	public static void menuLoop(Scanner scanner, Banque b1, Agence a1, ArrayList<Agence> listeAgence) {
+	public static void menuLoop(Scanner scanner, Banque b, Agence a, Client c, ArrayList<Agence> listeAgence) {
 
+		String idClient;
 		while (true) {
 			printMenuPrincipal();
 			int option = scanner.nextInt();
 			switch (option) {
 			case 1:
-				b1.nouvelleAgence();
+				b.nouvelleAgence();
 				break;
 			case 2:
-				a1.nouveauCompte();
+				a.nouveauCompte();
 				break;
 			case 3:
-				a1.nouveauClient();
+				a.nouveauClient();
 				break;
 			case 4:
+				System.out.println("Numéro Compte : ");
+				String noCompte = scanner.next();
+				a.afficherCompte(noCompte, a.getListeCompte());
 				break;
 			case 5:
+				System.out.println("Identifiant client : ");
+				idClient = scanner.next();
+				a.afficherClient(idClient, a.getListeClient());
 				break;
 			case 6:
+				System.out.println("Identifiant client : ");
+				idClient = scanner.next();
+				c.afficherListeComptes(idClient);
 				break;
 			case 7:
+				c.imprimerInfosClient();
 				break;
 			case 8:
 				System.out.println("Goodbye.");

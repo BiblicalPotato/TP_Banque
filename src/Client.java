@@ -69,6 +69,8 @@ public class Client {
     public void setNaissance(String naissance) {
 	this.naissance = naissance;
     }
+    
+    
 
     public void afficherListeComptes(String id) {
 	System.out.println("___________________________________________________________________");
@@ -84,11 +86,11 @@ public class Client {
 	return;
     }
 
-    public void afficherNoCompte() {
+    public String afficherNoCompte() {
 	for (Compte compte : listeCompteClient) {
-	    System.out.print(compte.getNoCompte());
+	    return compte.getNoCompte();
 	}
-	return;
+	return null;
     }
 
     public void imprimerInfosClient() {

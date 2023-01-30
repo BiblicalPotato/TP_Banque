@@ -63,6 +63,17 @@ public class Agence {
 	public String toString() {
 		return "Agence [codeAgence=" + codeAgence + ", nom=" + nom + ", adresse=" + adresse + "]";
 	}
+	
+	public void afficherClient(String id, ArrayList<Client> clients) {
+    	for (Client client : clients) {
+    		System.out.println("Numéro client : " + id + "\n"
+    				+ "Nom : " + nom + "\n"
+    						+ "Prénom : " + client.prenom + "\n"
+    								+ "Date de naissance : " + client.naissance +"\n"
+    										+ "Numéro(s) de compte : " + client.afficherNoCompte());
+		}
+		return;
+	}
 
 	public void nouveauClient() {
 		Scanner sc = new Scanner(System.in);
@@ -160,5 +171,14 @@ public class Agence {
 
 		sc.close();
 
+	}
+
+	public void afficherCompte(String noCompte, ArrayList<Compte> comptes) {
+		for (Compte compte : comptes) {
+			if(noCompte.equals(compte.getNoCompte())){
+				System.out.println(compte.toString());
+			}
+		}
+		
 	}
 }
