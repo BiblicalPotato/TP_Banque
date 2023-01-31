@@ -1,9 +1,12 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Agence {
+	static Scanner sc = new Scanner(System.in);
 
 	private String codeAgence;
 	private String nom;
@@ -63,14 +66,12 @@ public class Agence {
 	public String toString() {
 		return "Agence [codeAgence=" + codeAgence + ", nom=" + nom + ", adresse=" + adresse + "]";
 	}
-	
+
 	public void afficherClient(String id, ArrayList<Client> clients) {
-    	for (Client client : clients) {
-    		System.out.println("Numéro client : " + id + "\n"
-    				+ "Nom : " + nom + "\n"
-    						+ "Prénom : " + client.prenom + "\n"
-    								+ "Date de naissance : " + client.naissance +"\n"
-    										+ "Numéro(s) de compte : " + client.afficherNoCompte());
+		for (Client client : clients) {
+			System.out.println("Numéro client : " + id + "\n" + "Nom : " + nom + "\n" + "Prénom : " + client.prenom
+					+ "\n" + "Date de naissance : " + client.naissance + "\n" + "Numéro(s) de compte : "
+					+ client.afficherNoCompte());
 		}
 		return;
 	}
@@ -78,13 +79,13 @@ public class Agence {
 	public void nouveauClient() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println(" Quel est l'id du client ? ");
-		String id = sc.next();
+		String id = sc.nextLine();
 		Pattern p = Pattern.compile("[A-Z]{2}[0-9]{6}");
 		Matcher m = p.matcher(id);
 
 		if (m.matches()) {
 			System.out.println(" Quel est le nom du client ? ");
-			String nom = sc.next();
+			String nom = sc.nextLine();
 			System.out.println(" Quel est le prenom du client ? ");
 			String prenom = sc.nextLine();
 			System.out.println(" Quel est la date de naissance du client  ? ");
@@ -103,16 +104,16 @@ public class Agence {
 			System.out.println(" Requête annulée ");
 
 		}
-		sc.close();
+		// sc.close();
+
 	}
 
 	public boolean emailValide(Client client) {
-		Scanner sc = new Scanner(System.in);
 		String Regpex = "^[A-Za-z0-9._]+@[A-Za-z0-9._]+\\.[a-z]{2,}$";
 
 		Pattern p = Pattern.compile(Regpex);
 		Matcher m = p.matcher(client.getEmail());
-		sc.close();
+		// sc.close();
 
 		if (m.matches()) {
 			System.out.println(" email correct ");
@@ -128,7 +129,6 @@ public class Agence {
 	}
 
 	public void nouveauCompte() {
-		Scanner sc = new Scanner(System.in);
 		System.out.println(" Quel est le numero de compte ? ");
 		String id = sc.next();
 		String Regpex = "[0-9]{11}";
@@ -154,13 +154,10 @@ public class Agence {
 
 				}
 
-				else
-					return;
-
 			}
-			sc.close();
+			// sc.close();
 			Compte compte = new Compte(id, codeAgence, client1, solde, type);
-			listeComptes.add(compte);
+			client1.listeCompteClient.add(compte);
 
 		} else {
 
@@ -169,16 +166,17 @@ public class Agence {
 
 		}
 
-		sc.close();
+		// sc.close();
 
 	}
 
 	public void afficherCompte(String noCompte, ArrayList<Compte> comptes) {
 		for (Compte compte : comptes) {
-			if(noCompte.equals(compte.getNoCompte())){
+			if (noCompte.equals(compte.getNoCompte())) {
 				System.out.println(compte.toString());
 			}
 		}
-		
+
 	}
+
 }

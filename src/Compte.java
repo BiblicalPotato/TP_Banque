@@ -16,8 +16,13 @@ public class Compte {
 		this.client = client;
 		this.solde = solde;
 
+		
+		
+		
 	}
 
+	
+	
 	public String getNoCompte() {
 		return noCompte;
 	}

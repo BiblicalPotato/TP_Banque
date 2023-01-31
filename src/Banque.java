@@ -5,7 +5,9 @@ import java.util.regex.Pattern;
 
 public class Banque {
 
-	String nom;
+	static Scanner sc = new Scanner(System.in);
+
+	private String nom;
 	ArrayList<Agence> listeAgences = new ArrayList<Agence>();
 
 	public Banque(String nom) {
@@ -22,9 +24,8 @@ public class Banque {
 	}
 
 	public void nouvelleAgence() {
-		Scanner sc = new Scanner(System.in);
 		System.out.println(" Quel est le code de l'agence ? ");
-		String codeAgence = sc.next();
+		String codeAgence = sc.nextLine();
 
 		Pattern p = Pattern.compile("[0-9]{3}");
 
@@ -32,7 +33,7 @@ public class Banque {
 
 		if (m.matches()) {
 			System.out.println(" Quel est le nom de l'agence ? ");
-			String nom = sc.next();
+			String nom = sc.nextLine();
 			System.out.println(" Quel est l'adresse de l'agence ? ");
 			String adresse = sc.nextLine();
 			Agence agence = new Agence(codeAgence, nom, adresse);
@@ -43,7 +44,7 @@ public class Banque {
 			System.out.println(" Le code n'est pas bon, donnez 3 chiffres ");
 
 		}
-		sc.close();
+		//sc.close();
 	}
 
 }

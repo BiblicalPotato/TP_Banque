@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,16 +9,17 @@ public class Test {
 		// TODO Auto-generated method stub
 		Scanner scanner = new Scanner(System.in);
 		Banque b = new Banque("BANQUE CDA");
-		Agence a = new Agence("lmp", "lmp", "fhg");
+		Agence a = new Agence("123", "a", "fhg");
 		Client c = new Client(null, null, null, null, null);
 		ArrayList<Agence> listeAgence = new ArrayList<Agence>();
 
 		menuLoop(scanner, b, a, c, listeAgence);
+
 	}
 
 	public static void menuLoop(Scanner scanner, Banque b, Agence a, Client c, ArrayList<Agence> listeAgence) {
-
 		String idClient;
+		
 		while (true) {
 			printMenuPrincipal();
 			int option = scanner.nextInt();
@@ -43,10 +46,15 @@ public class Test {
 			case 6:
 				System.out.println("Identifiant client : ");
 				idClient = scanner.next();
-				c.afficherListeComptes(idClient);
+				for (Client client : a.getListeClient()) {
+					if(idClient.equals(client.getId())){
+						client.afficherListeComptes();
+					}
+				}
+				
 				break;
 			case 7:
-				c.imprimerInfosClient();
+
 				break;
 			case 8:
 				System.out.println("Goodbye.");
@@ -71,6 +79,43 @@ public class Test {
 		System.out.println("");
 		System.out.println("___________________________________________________________________________");
 
+	}
+
+	public void imprimerInfosClient(String id, Agence a) {
+		try {
+			FileWriter fw = new FileWriter("Fiche client.txt");
+
+			fw.write("Fiche client " + "\r\n");
+
+			for (Client client : a.getListeClient()) {
+				if (id.equals(client.getId())) {
+					fw.write(client.getId() + "\r\n");
+					fw.write(client.getNom() + "\r\n");
+					fw.write(client.getPrenom() + "\r\n");
+					fw.write(client.getNaissance() + "\r\n" + "\r\n");
+				}
+			}
+
+			fw.write("___________________________________________________________________" + "\r\n");
+			fw.write("Liste de compte" + "\r\n");
+			fw.write("___________________________________________________________________" + "\r\n");
+			fw.write("Numéro de compte                Solde" + "\r\n");
+			fw.write("\r\n" + "\r\n");
+
+			for (Compte compte : a.getListeCompte()) {
+				if (id.equals(compte.getClient().getId())) {
+					fw.write(compte.getCodeAgence() + "\r\n");
+					fw.write(compte.getFraisAnnuels() + "\r\n");
+					fw.write(compte.getNoCompte() + "\r\n");
+					fw.write(compte.getSolde() + "\r\n" + "\r\n");
+				}
+			}
+			
+			fw.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
